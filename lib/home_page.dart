@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_latihankuis/profil_page.dart';
+import 'package:tugas_latihankuis/save_button.dart'; // Import tombol custom
 
 class HomePage extends StatefulWidget {
   final String username;
@@ -33,66 +34,64 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            elevation: 8,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Lengkapi Profil Anda",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blueGrey),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildTextField(_nameController, 'Nama Lengkap'),
-                  _buildTextField(_nimController, 'NIM'),
-                  _buildTextField(_workExperienceController, 'Pengalaman Kerja'),
-                  _buildTextField(_organizationExperienceController, 'Pengalaman Organisasi'),
-                  _buildTextField(_hardSkillController, 'Hard Skill'),
-                  _buildTextField(_softSkillController, 'Soft Skill'),
-                  _buildTextField(_achivementController, 'Pencapaian/Penghargaan'),
-                  const SizedBox(height: 20),
-                  Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueGrey,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ProfilePage(
-                                name: _nameController.text,
-                                nim: _nimController.text,
-                                workExperience: _workExperienceController.text,
-                                organizationExperience: _organizationExperienceController.text,
-                                hardSkill: _hardSkillController.text,
-                                softSkill: _softSkillController.text,
-                                achivement: _achivementController.text,
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      child: const Text('Simpan & Lihat Profil', style: TextStyle(fontSize: 16)),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              elevation: 8,
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Agar ukuran sesuai kontennya
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Lengkapi Profil Anda",
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blueGrey),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    _buildTextField(_nameController, 'Nama Lengkap'),
+                    _buildTextField(_nimController, 'NIM'),
+                    _buildTextField(_workExperienceController, 'Pengalaman Kerja'),
+                    _buildTextField(_organizationExperienceController, 'Pengalaman Organisasi'),
+                    _buildTextField(_hardSkillController, 'Hard Skill'),
+                    _buildTextField(_softSkillController, 'Soft Skill'),
+                    _buildTextField(_achivementController, 'Pencapaian/Penghargaan'),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: SaveButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProfilePage(
+                                  name: _nameController.text,
+                                  nim: _nimController.text,
+                                  workExperience: _workExperienceController.text,
+                                  organizationExperience: _organizationExperienceController.text,
+                                  hardSkill: _hardSkillController.text,
+                                  softSkill: _softSkillController.text,
+                                  achivement: _achivementController.text,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
+
     );
   }
 
